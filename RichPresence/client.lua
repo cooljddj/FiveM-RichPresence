@@ -29,15 +29,15 @@ Citizen.CreateThread(function()
 				end
 				end
 			elseif IsPedInAnyVehicle(PlayerPedId(), false) and not IsPedInAnyHeli(PlayerPedId()) and not IsPedInAnyPlane(PlayerPedId()) and not IsPedOnFoot(PlayerPedId()) and not IsPedInAnySub(PlayerPedId()) and not IsPedInAnyBoat(PlayerPedId()) then
-				local MPH = math.ceil(GetEntitySpeed(GetVehiclePedIsUsing(PlayerPedId())) * 2.23693629205)
+				local KPH = math.ceil(GetEntitySpeed(GetVehiclePedIsIn(GetPlayerPed(-1), false))*3.6)
 				local VehName = GetLabelText(GetDisplayNameFromVehicleModel(GetEntityModel(GetVehiclePedIsUsing(PlayerPedId()))))
-				if MPH > 50 and not IsPedOnAnyBike(PlayerPedId()) then
-					SetRichPresence("Speeding down "..StreetName.." In a "..VehName)
-				elseif MPH <= 50 and MPH > 0  then
-					SetRichPresence("Cruising down "..StreetName.." In a "..VehName)
-				elseif MPH == 0 then
+				if KPH > 50 and not IsPedOnAnyBike(PlayerPedId()) then
+					SetRichPresence("Speeding down "..StreetName.." In a "..VehName.." Speed: "..KPH)
+				elseif KPH <= 50 and KPH > 0  then
+					SetRichPresence("Cruising down "..StreetName.." In a "..VehName.." Speed: "..KPH)
+				elseif KPH == 0 then
 					SetRichPresence("Parked on "..StreetName.." In a "..VehName)
-				elseif MPH > 50 and IsPedOnAnyBike(PlayerPedId()) then
+				elseif KPH > 5 and IsPedOnAnyBike(PlayerPedId()) then
 					SetRichPresence("Riding near "..StreetName.." In a "..VehName)
 				end
 			elseif IsPedInAnyHeli(PlayerPedId()) or IsPedInAnyPlane(PlayerPedId()) then
